@@ -4,16 +4,26 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float speed = 7f;
     public Rigidbody2D rb;
-
     Vector2 movement;
     int horizontal;
     int vertical;
 
+    private int numBombs = 1;
+    private int bombRange = 1;
+    private int explosionDelay = 3;
+    public float speed = 5f;
+    private bool bombPenetrate = false;
+    private bool canWalkThroughWalls = false;
+    private bool canMoveBombs = false;
+    private bool hasShield = false;
+    private bool canCreateWall = false;
+
     private void Start()
     {
+        gameObject.AddComponent<BoxCollider2D>();
         rb = GetComponent<Rigidbody2D>();
+        rb.bodyType = RigidbodyType2D.Dynamic;
     }
 
     // Update is called once per frame
@@ -21,13 +31,20 @@ public class PlayerMovement : MonoBehaviour
     {
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
-       
-
     }
 
     private void FixedUpdate()
     {
         // Movement
         rb.MovePosition(rb.position + movement * speed * Time.fixedDeltaTime);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if ( collision.gameObject.tag == "Movement")
+        {
+            speed += 5.0f;
+            Destroy(collision.gameObject);
+        }
     }
 }
