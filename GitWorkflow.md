@@ -1,16 +1,20 @@
 # Git Workflow
 
-1. Create and checkout to a branch
+To make a branch:
+ - Create and checkout to a branch
 
     `git checkout -b branch_name`
     
-2. Push your branch onto the remote repo
+ - Push your branch onto the remote repo
 
     `git push origin branch_name`
+1. Pull the latest code from the master branch and resolve any merge conflicts
     
-3. Make your changes
+    `git pull origin master`
+    
+2. Make your changes
 
-4. Add and commit
+3. Add and commit
     
     `git add <filename>` or `git add *` to add everything
 
@@ -18,11 +22,11 @@
 
     `git commit -m “commit message”`
 
-5. Pull the latest code from the master branch and resolve any merge conflicts
+4. Pull the latest code from the master branch and resolve any merge conflicts
     
     `git pull origin master`
     
-6. Push your branch onto your remote repo
+5. Push your branch onto your remote repo
     
     `git push origin branch_name`
 
