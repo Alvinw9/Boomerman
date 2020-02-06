@@ -19,6 +19,9 @@ public class PlayerMovement : MonoBehaviour
     private bool hasShield = false;
     private bool canCreateWall = false;
 
+    private bool placeBomb;
+    public GameObject bomb;
+
     private void Start()
     {
         gameObject.AddComponent<BoxCollider2D>();
@@ -31,12 +34,26 @@ public class PlayerMovement : MonoBehaviour
     {
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
+
+        if (Input.GetKeyUp("space"))
+        {
+            placeBomb = true;
+        }
     }
 
     private void FixedUpdate()
     {
         // Movement
         rb.MovePosition(rb.position + movement * speed * Time.fixedDeltaTime);
+
+        if (placeBomb)
+        {
+            GameObject newBomb = Instantiate(bomb, new Vector2(Mathf.RoundToInt(rb.position.x),
+                                            Mathf.RoundToInt(rb.position.y)), transform.rotation);
+            Destroy(newBomb, 2);
+            placeBomb = false;
+   
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
