@@ -48,7 +48,8 @@ public class PlayerMovement : MonoBehaviour
 
         if (placeBomb)
         {
-            GameObject newBomb = Instantiate(bomb, rb.position, transform.rotation);
+            GameObject newBomb = Instantiate(bomb, new Vector2(Mathf.RoundToInt(rb.position.x),
+                                            Mathf.RoundToInt(rb.position.y)), transform.rotation);
             Destroy(newBomb, 2);
             placeBomb = false;
    
