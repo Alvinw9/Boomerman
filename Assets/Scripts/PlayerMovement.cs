@@ -35,7 +35,7 @@ public class PlayerMovement : MonoBehaviour
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
 
-        if (Input.GetKeyUp("space"))
+        if (Input.GetKeyUp("space") && (numBombs > 0))
         {
             placeBomb = true;
         }
@@ -50,7 +50,8 @@ public class PlayerMovement : MonoBehaviour
         {
             GameObject newBomb = Instantiate(bomb, new Vector2(Mathf.RoundToInt(rb.position.x),
                                             Mathf.RoundToInt(rb.position.y)), transform.rotation);
-            Destroy(newBomb, 2);
+            Destroy(newBomb, 5);
+            numBombs--;
             placeBomb = false;
    
         }
@@ -58,9 +59,14 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if ( collision.gameObject.tag == "Movement")
+        if (collision.gameObject.tag == "Movement")
         {
             speed += 5.0f;
+            Destroy(collision.gameObject);
+        }
+
+        if (collision.gameObject.tag == "Move Bomb")
+        {
             Destroy(collision.gameObject);
         }
     }
