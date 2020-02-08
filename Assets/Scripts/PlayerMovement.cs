@@ -19,6 +19,7 @@ public class PlayerMovement : MonoBehaviour
     private bool hasShield = false;
     private bool canCreateWall = false;
     private bool stunned = false;
+    private bool reverseMovement = false;
 
     private bool placeBomb;
     public GameObject bomb;
@@ -50,8 +51,15 @@ public class PlayerMovement : MonoBehaviour
 
         if (!stunned)
         {
-            // Movement
-            rb.MovePosition(rb.position + movement * speed * Time.fixedDeltaTime);
+            if (!reverseMovement)
+            {
+                // normal movement
+                rb.MovePosition(rb.position + movement * speed * Time.fixedDeltaTime);
+            } else
+            {
+                // reverse movement
+                rb.MovePosition(rb.position - movement * speed * Time.fixedDeltaTime);
+            }
 
             if (placeBomb)
             {
@@ -68,12 +76,14 @@ public class PlayerMovement : MonoBehaviour
     {
         if ( collision.gameObject.tag == "Movement" )
         {
+
             // increase speed for movement buff
             speed += 3.5f;
             Destroy(collision.gameObject);
 
         } else if ( collision.gameObject.tag == "MovementDebuff" )
         {
+
             // decrease speed for movement debuff
             speed -= 3.5f;
             Destroy(collision.gameObject);
@@ -85,13 +95,31 @@ public class PlayerMovement : MonoBehaviour
             StartCoroutine(performSelfStun());
             Destroy(collision.gameObject);
 
+        } else if ( collision.gameObject.tag == "ReverseMovement")
+        {
+
+            // momentarily reverse the direction of movement
+            StartCoroutine(reversePlayerMovement());
+            Destroy(collision.gameObject);
+
         }
+
     }
 
     IEnumerator performSelfStun()
     {
+        // stun for 2 seconds
         stunned = true;
         yield return new WaitForSeconds(2.0f);
         stunned = false;
     }
+
+    IEnumerator reversePlayerMovement()
+    {
+        // reverse direction of movement for 3.5 seconds
+        reverseMovement = true;
+        yield return new WaitForSeconds(3.5f);
+        reverseMovement = false;
+    }
+
 }
