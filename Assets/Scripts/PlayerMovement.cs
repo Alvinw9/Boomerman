@@ -60,8 +60,16 @@ public class PlayerMovement : MonoBehaviour
     {
         if ( collision.gameObject.tag == "Movement")
         {
-            speed += 5.0f;
+            // increase speed for movement buff
+            speed += 3.5f;
             Destroy(collision.gameObject);
+
+        } else if ( collision.gameObject.tag == "MovementDebuff")
+        {
+            // decrease speed for movement debuff
+            speed -= 3.5f;
+            Destroy(collision.gameObject);
+
         }
     }
 }
