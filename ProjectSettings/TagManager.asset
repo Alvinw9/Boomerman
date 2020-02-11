@@ -8,6 +8,8 @@ TagManager:
   - MovementDebuff
   - SelfStun
   - ReverseMovement
+  - Wall
+  - Bomb
   layers:
   - Default
   - TransparentFX
