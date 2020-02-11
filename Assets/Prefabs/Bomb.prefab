@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4333497445193145392}
   - component: {fileID: 4333497445193145393}
   - component: {fileID: 786091207482435839}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bomb
   m_TagString: Bomb
   m_Icon: {fileID: 0}
@@ -118,6 +118,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 0}
+  bomb: {fileID: 0}
 --- !u!114 &4333497445193145393
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -144,3 +145,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   explosion: {fileID: 7120856944098285065, guid: e0efe26d633545c48ae0aff2d88f400b,
     type: 3}
+  bombPrefab: {fileID: 0}

@@ -65,7 +65,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 Bomb newBomb = Instantiate(bomb, new Vector2(Mathf.RoundToInt(rb.position.x),
                                                 Mathf.RoundToInt(rb.position.y)), transform.rotation);
-                Destroy(newBomb, 5);
+                //Destroy(newBomb, 5);
                 StartCoroutine(newBomb.GetComponent<Bomb>().Explode());
                 placeBomb = false;
             }

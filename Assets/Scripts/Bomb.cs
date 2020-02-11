@@ -4,7 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Bomb : MonoBehaviour {
+    
     public GameObject explosion;
+    public Bomb bombPrefab;
 
     // Start is called before the first frame update
     void Start()
@@ -14,7 +16,7 @@ public class Bomb : MonoBehaviour {
 
     public IEnumerator Explode()
     {
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSeconds(4.0f);
         GameObject rightExplosion = Instantiate(explosion, new Vector2(Mathf.RoundToInt(this.transform.position.x + 1),
                                                 Mathf.RoundToInt(this.transform.position.y)), transform.rotation);
         GameObject leftExplosion = Instantiate(explosion, new Vector2(Mathf.RoundToInt(this.transform.position.x - 1),
@@ -46,9 +48,13 @@ public class Bomb : MonoBehaviour {
 
         /*if (collision.gameObject.tag == "Bomb")
         {
-            Physics.IgnoreCollision(Bomb.collider, GetComponent<collider>());
-        }
+            //Bomb bomb = Instantiate(bombPrefab);
+            //Physics2D.IgnoreCollision(bomb.GetComponent<Collider2D>(), GetComponent<Collider2D>());
+            Physics2D.IgnoreCollision(collision.collider, GetComponent<Collider2D>());
+            Debug.Log("WHY THO");
+        }*/
 
+        /*
         if (collision.gameObject.GetComponent<Bomb>() != null)
         {
 
