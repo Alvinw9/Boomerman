@@ -14,7 +14,7 @@ public class Bomb : MonoBehaviour {
 
     public IEnumerator Explode()
     {
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(2.0f);
         GameObject rightExplosion = Instantiate(explosion, new Vector2(Mathf.RoundToInt(this.transform.position.x + 1),
                                                 Mathf.RoundToInt(this.transform.position.y)), transform.rotation);
         GameObject leftExplosion = Instantiate(explosion, new Vector2(Mathf.RoundToInt(this.transform.position.x - 1),
