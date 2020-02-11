@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8488804988400267994}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -116,5 +116,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 8488804988400267995}
-  speed: 5
   bomb: {fileID: 1673522207427961671, guid: e3ded467a9fe4aa438c0776470dcd673, type: 3}
