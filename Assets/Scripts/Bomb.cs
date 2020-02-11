@@ -41,24 +41,15 @@ public class Bomb : MonoBehaviour {
     private void OnCollisionEnter2D(Collision2D collision)
     {
         // destroy buff or debuff
-        if (collision.gameObject.tag != "Player" && collision.gameObject.tag != "Wall")
+        if (collision.gameObject.tag != "Player" && collision.gameObject.tag != "Wall" && collision.gameObject.tag != "Bomb")
         {
             Destroy(collision.gameObject);
         }
 
-        /*if (collision.gameObject.tag == "Bomb")
+        if ( collision.gameObject.tag == "Bomb")
         {
-            //Bomb bomb = Instantiate(bombPrefab);
-            //Physics2D.IgnoreCollision(bomb.GetComponent<Collider2D>(), GetComponent<Collider2D>());
-            Physics2D.IgnoreCollision(collision.collider, GetComponent<Collider2D>());
-            Debug.Log("WHY THO");
-        }*/
-
-        /*
-        if (collision.gameObject.GetComponent<Bomb>() != null)
-        {
-
-        }*/
+            collision.gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+        }
 
     }
 
