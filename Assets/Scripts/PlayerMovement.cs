@@ -22,7 +22,7 @@ public class PlayerMovement : MonoBehaviour
     private bool reverseMovement = false;
 
     private bool placeBomb;
-    public GameObject bomb;
+    public Bomb bomb;
 
     private void Start()
     {
@@ -63,11 +63,11 @@ public class PlayerMovement : MonoBehaviour
 
             if (placeBomb)
             {
-                GameObject newBomb = Instantiate(bomb, new Vector2(Mathf.RoundToInt(rb.position.x),
+                Bomb newBomb = Instantiate(bomb, new Vector2(Mathf.RoundToInt(rb.position.x),
                                                 Mathf.RoundToInt(rb.position.y)), transform.rotation);
                 Destroy(newBomb, 5);
+                StartCoroutine(newBomb.GetComponent<Bomb>().Explode());
                 placeBomb = false;
-
             }
         }
     }
