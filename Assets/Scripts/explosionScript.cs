@@ -21,6 +21,10 @@ public class explosionScript : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             Destroy(collision.gameObject);
+        } else if ( collision.gameObject.tag == "Wall")
+        {
+            Debug.Log("YEEET");
+            Destroy(collision.gameObject);
         }
     }
 
