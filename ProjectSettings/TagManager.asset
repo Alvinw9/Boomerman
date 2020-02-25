@@ -11,6 +11,8 @@ TagManager:
   - Wall
   - Bomb
   - IncreaseBombs
+  - Explosion
+  - BombSpawn
   layers:
   - Default
   - TransparentFX
@@ -21,10 +23,10 @@ TagManager:
   - 
   - 
   - bomb
-  - 
-  - 
-  - 
-  - 
+  - Player
+  - ground
+  - spawnBomb
+  - explosion
   - 
   - 
   - 

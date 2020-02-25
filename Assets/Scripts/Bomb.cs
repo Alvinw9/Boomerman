@@ -7,6 +7,7 @@ public class Bomb : MonoBehaviour {
     
     public GameObject explosion;
     public Bomb bombPrefab;
+    public Rigidbody2D rb;
 
     // Start is called before the first frame update
     void Start()
@@ -17,6 +18,8 @@ public class Bomb : MonoBehaviour {
     public IEnumerator Explode()
     {
         yield return new WaitForSeconds(4.0f);
+        GameObject bombExplosion = Instantiate(explosion, new Vector2(Mathf.RoundToInt(this.transform.position.x),
+                                                Mathf.RoundToInt(this.transform.position.y)), transform.rotation);
         GameObject rightExplosion = Instantiate(explosion, new Vector2(Mathf.RoundToInt(this.transform.position.x + 1),
                                                 Mathf.RoundToInt(this.transform.position.y)), transform.rotation);
         GameObject leftExplosion = Instantiate(explosion, new Vector2(Mathf.RoundToInt(this.transform.position.x - 1),
@@ -25,6 +28,7 @@ public class Bomb : MonoBehaviour {
                                         Mathf.RoundToInt(this.transform.position.y + 1)), transform.rotation);
         GameObject bottomExplosion = Instantiate(explosion, new Vector2(Mathf.RoundToInt(this.transform.position.x),
                                         Mathf.RoundToInt(this.transform.position.y - 1)), transform.rotation);
+        Destroy(bombExplosion, 0.2f);
         Destroy(rightExplosion, 0.2f);
         Destroy(leftExplosion, 0.2f);
         Destroy(topExplosion, 0.2f);
@@ -51,6 +55,15 @@ public class Bomb : MonoBehaviour {
         {
             collision.gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
         }
+
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+
+        // sets the mass so the bomb can be pushed
+        rb = GetComponent<Rigidbody2D>();
+        rb.mass = 1;
 
     }
 
