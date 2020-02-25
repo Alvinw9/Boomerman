@@ -9,7 +9,8 @@ public class PlayerMovement : MonoBehaviour
     int horizontal;
     int vertical;
 
-    private int numBombs = 1;
+    public static int bombsDropped = 0; // number of bombs that exist on the map
+    private int numBombs = 1; // limit to number of bombs player can create at a time
     private int bombRange = 1;
     private int explosionDelay = 3;
     private float speed = 5f;
@@ -39,7 +40,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (!stunned)
         {
-            if (Input.GetKeyUp("space"))
+            if (Input.GetKeyUp("space") && (bombsDropped < numBombs))
             {
                 placeBomb = true;
             }
@@ -65,6 +66,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 Bomb newBomb = Instantiate(bomb, new Vector2(Mathf.RoundToInt(rb.position.x),
                                                 Mathf.RoundToInt(rb.position.y)), transform.rotation);
+                ++bombsDropped;
                 //Destroy(newBomb, 5);
                 StartCoroutine(newBomb.GetComponent<Bomb>().Explode());
                 placeBomb = false;
@@ -102,6 +104,11 @@ public class PlayerMovement : MonoBehaviour
             StartCoroutine(reversePlayerMovement());
             Destroy(collision.gameObject);
 
+        } else if (collision.gameObject.tag == "IncreaseBombs")
+        {
+            // increases the number of bombs that can be dropped at one time
+            numBombs++;
+            Destroy(collision.gameObject);
         }
 
     }

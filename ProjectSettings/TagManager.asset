@@ -10,6 +10,7 @@ TagManager:
   - ReverseMovement
   - Wall
   - Bomb
+  - IncreaseBombs
   layers:
   - Default
   - TransparentFX

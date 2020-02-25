@@ -31,6 +31,7 @@ public class Bomb : MonoBehaviour {
         Destroy(bottomExplosion, 0.2f);
         Destroy(this.gameObject, 0.2f);
 
+        PlayerMovement.bombsDropped--;
     }
     // Update is called once per frame
     void Update()
