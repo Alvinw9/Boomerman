@@ -68,8 +68,8 @@ public class PlayerMovement : MonoBehaviour
                 Bomb newBomb = Instantiate(bomb, new Vector2(Mathf.RoundToInt(rb.position.x),
                                                 Mathf.RoundToInt(rb.position.y)), transform.rotation);
                 ++bombsDropped;
-                //Destroy(newBomb, 5);
                 StartCoroutine(newBomb.GetComponent<Bomb>().Explode());
+                StartCoroutine(delayBombs());
                 placeBomb = false;
             }
         }
@@ -128,6 +128,12 @@ public class PlayerMovement : MonoBehaviour
         reverseMovement = true;
         yield return new WaitForSeconds(3.5f);
         reverseMovement = false;
+    }
+
+    IEnumerator delayBombs()
+    {
+        yield return new WaitForSeconds(4.0f);
+        bombsDropped--;
     }
 
 }

@@ -34,8 +34,6 @@ public class Bomb : MonoBehaviour {
         Destroy(topExplosion, 0.2f);
         Destroy(bottomExplosion, 0.2f);
         Destroy(this.gameObject, 0.2f);
-
-        PlayerMovement.bombsDropped--;
     }
     // Update is called once per frame
     void Update()
@@ -63,7 +61,7 @@ public class Bomb : MonoBehaviour {
 
         // sets the mass so the bomb can be pushed
         rb = GetComponent<Rigidbody2D>();
-        rb.mass = 1;
+        //rb.mass = 1;
 
     }
 
