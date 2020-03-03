@@ -2,12 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class Player2Movement : MonoBehaviour
 {
     public Rigidbody2D rb;
     Vector2 movement;
-    int horizontal;
-    int vertical;
 
     public static int bombsDropped = 0; // number of bombs that exist on the map
     private int numBombs = 1; // limit to number of bombs player can create at a time
@@ -35,13 +33,13 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        movement.x = Input.GetAxisRaw("Horizontal");
-        movement.y = Input.GetAxisRaw("Vertical");
+        movement.x = Input.GetAxisRaw("Horizontal2");
+        movement.y = Input.GetAxisRaw("Vertical2");
 
         if (!stunned)
         {
-            // "Enter" key to place bomb
-            if (Input.GetKeyUp(KeyCode.Return) && (bombsDropped < numBombs))
+            // "space" key to place bomb
+            if (Input.GetKeyUp("space") && (bombsDropped < numBombs))
             {
                 placeBomb = true;
             }
@@ -57,7 +55,8 @@ public class PlayerMovement : MonoBehaviour
             {
                 // normal movement
                 rb.MovePosition(rb.position + movement * speed * Time.fixedDeltaTime);
-            } else
+            }
+            else
             {
                 // reverse movement
                 rb.MovePosition(rb.position - movement * speed * Time.fixedDeltaTime);
@@ -77,35 +76,39 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if ( collision.gameObject.tag == "Movement" )
+        if (collision.gameObject.tag == "Movement")
         {
 
             // increase speed for movement buff
             speed += 3.5f;
             Destroy(collision.gameObject);
 
-        } else if ( collision.gameObject.tag == "MovementDebuff" )
+        }
+        else if (collision.gameObject.tag == "MovementDebuff")
         {
 
             // decrease speed for movement debuff
             speed -= 3.5f;
             Destroy(collision.gameObject);
 
-        } else if ( collision.gameObject.tag == "SelfStun" )
+        }
+        else if (collision.gameObject.tag == "SelfStun")
         {
 
             // momentarily stop movement and ability to place bombs
             StartCoroutine(performSelfStun());
             Destroy(collision.gameObject);
 
-        } else if ( collision.gameObject.tag == "ReverseMovement")
+        }
+        else if (collision.gameObject.tag == "ReverseMovement")
         {
 
             // momentarily reverse the direction of movement
             StartCoroutine(reversePlayerMovement());
             Destroy(collision.gameObject);
 
-        } else if (collision.gameObject.tag == "IncreaseBombs")
+        }
+        else if (collision.gameObject.tag == "IncreaseBombs")
         {
             // increases the number of bombs that can be dropped at one time
             numBombs++;
