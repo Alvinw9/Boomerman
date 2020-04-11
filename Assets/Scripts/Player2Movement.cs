@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Player2Movement : MonoBehaviour
 {
+    public GameObject enemyPlayer;
+    public PlayerMovement enemySprite;
     public Rigidbody2D rb;
     Vector2 movement;
 
@@ -18,6 +20,8 @@ public class Player2Movement : MonoBehaviour
     private bool hasShield = false;
     private bool canCreateWall = false;
     private bool stunned = false;
+    public bool shouldFreeze = false;
+    private bool frozen = false;
     private bool reverseMovement = false;
 
     private bool placeBomb;
@@ -36,7 +40,13 @@ public class Player2Movement : MonoBehaviour
         movement.x = Input.GetAxisRaw("Horizontal2");
         movement.y = Input.GetAxisRaw("Vertical2");
 
-        if (!stunned)
+        if (shouldFreeze)
+        {
+            shouldFreeze = false;
+            StartCoroutine(performFreeze());
+        }
+
+        if (!stunned && !frozen)
         {
             // "space" key to place bomb
             if (Input.GetKeyUp("space") && (bombsDropped < numBombs))
@@ -49,7 +59,7 @@ public class Player2Movement : MonoBehaviour
     private void FixedUpdate()
     {
 
-        if (!stunned)
+        if (!stunned && !frozen)
         {
             if (!reverseMovement)
             {
@@ -114,6 +124,14 @@ public class Player2Movement : MonoBehaviour
             numBombs++;
             Destroy(collision.gameObject);
         }
+        else if (collision.gameObject.tag == "Freeze")
+        {
+            // temporarily freeze the other player
+            enemyPlayer = GameObject.FindGameObjectWithTag("Player");
+            enemySprite = enemyPlayer.GetComponent<PlayerMovement>();
+            enemySprite.shouldFreeze = true;
+            Destroy(collision.gameObject);
+        }
 
     }
 
@@ -137,6 +155,14 @@ public class Player2Movement : MonoBehaviour
     {
         yield return new WaitForSeconds(4.0f);
         bombsDropped--;
+    }
+
+    IEnumerator performFreeze()
+    {
+        // freeze for 1.5 seconds
+        frozen = true;
+        yield return new WaitForSeconds(1.5f);
+        frozen = false;
     }
 
 }

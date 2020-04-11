@@ -181,6 +181,16 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 1188606373077108746, guid: c0488f0c52e2abc40a5a5311fd282744,
+        type: 3}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
+    - target: {fileID: 1188606373077108746, guid: c0488f0c52e2abc40a5a5311fd282744,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1188606373205497279, guid: c0488f0c52e2abc40a5a5311fd282744,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -236,16 +246,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1188606373077108746, guid: c0488f0c52e2abc40a5a5311fd282744,
-        type: 3}
-      propertyPath: m_TagString
-      value: Wall
-      objectReference: {fileID: 0}
-    - target: {fileID: 1188606373077108746, guid: c0488f0c52e2abc40a5a5311fd282744,
-        type: 3}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1188606373498467151, guid: c0488f0c52e2abc40a5a5311fd282744,
         type: 3}
       propertyPath: m_Layer
@@ -259,6 +259,11 @@ PrefabInstance:
     - target: {fileID: 1188606373077108745, guid: c0488f0c52e2abc40a5a5311fd282744,
         type: 3}
       propertyPath: m_DetectChunkCullingBounds
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1188606373077108744, guid: c0488f0c52e2abc40a5a5311fd282744,
+        type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -363,6 +368,28 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d2addd45e5615084c8738ffebabc16ec, type: 3}
+--- !u!1 &1812078238 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1188606373498467151, guid: c0488f0c52e2abc40a5a5311fd282744,
+    type: 3}
+  m_PrefabInstance: {fileID: 299700065}
+  m_PrefabAsset: {fileID: 0}
+--- !u!19719996 &1812078242
+TilemapCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1812078238}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_MaximumTileChangeCount: 1000
+  m_ExtrusionFactor: 0.00001
 --- !u!1 &2058277439
 GameObject:
   m_ObjectHideFlags: 0

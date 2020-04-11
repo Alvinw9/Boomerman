@@ -2,12 +2,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class Bomb : MonoBehaviour {
     
     public GameObject explosion;
     public Bomb bombPrefab;
     public Rigidbody2D rb;
+    public Tilemap tilemap;
 
     // Start is called before the first frame update
     void Start()
@@ -44,7 +46,7 @@ public class Bomb : MonoBehaviour {
     private void OnCollisionEnter2D(Collision2D collision)
     {
         // destroy buff or debuff
-        if (collision.gameObject.tag != "Player" && collision.gameObject.tag != "Wall" && collision.gameObject.tag != "Bomb")
+        if (collision.gameObject.tag != "Player" && collision.gameObject.tag != "Player2" && collision.gameObject.tag != "Wall" && collision.gameObject.tag != "Bomb")
         {
             Destroy(collision.gameObject);
         }
@@ -52,6 +54,11 @@ public class Bomb : MonoBehaviour {
         if ( collision.gameObject.tag == "Bomb")
         {
             collision.gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+        }
+
+        if (collision.gameObject.tag == "Wall")
+        {
+            tilemap.SetTile(tilemap.WorldToCell(collision.rigidbody.position), null);
         }
 
     }

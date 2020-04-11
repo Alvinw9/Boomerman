@@ -13,6 +13,7 @@ TagManager:
   - IncreaseBombs
   - Explosion
   - BombSpawn
+  - Player2
   layers:
   - Default
   - TransparentFX

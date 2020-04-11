@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public GameObject enemyPlayer;
+    public Player2Movement enemySprite;
     public Rigidbody2D rb;
     Vector2 movement;
     int horizontal;
@@ -20,6 +22,8 @@ public class PlayerMovement : MonoBehaviour
     private bool hasShield = false;
     private bool canCreateWall = false;
     private bool stunned = false;
+    public bool shouldFreeze = false;
+    private bool frozen = false;
     private bool reverseMovement = false;
 
     private bool placeBomb;
@@ -38,7 +42,13 @@ public class PlayerMovement : MonoBehaviour
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
 
-        if (!stunned)
+        if (shouldFreeze)
+        {
+            shouldFreeze = false;
+            StartCoroutine(performFreeze());
+        }
+
+        if (!stunned && !frozen)
         {
             // "Enter" key to place bomb
             if (Input.GetKeyUp(KeyCode.Return) && (bombsDropped < numBombs))
@@ -51,7 +61,7 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
 
-        if (!stunned)
+        if (!stunned && !frozen)
         {
             if (!reverseMovement)
             {
@@ -111,6 +121,14 @@ public class PlayerMovement : MonoBehaviour
             numBombs++;
             Destroy(collision.gameObject);
         }
+        else if (collision.gameObject.tag == "Freeze")
+        {
+            // temporarily freeze the other player
+            enemyPlayer = GameObject.FindGameObjectWithTag("Player2");
+            enemySprite = enemyPlayer.GetComponent<Player2Movement>();
+            enemySprite.shouldFreeze = true;
+            Destroy(collision.gameObject);
+        }
 
     }
 
@@ -134,6 +152,14 @@ public class PlayerMovement : MonoBehaviour
     {
         yield return new WaitForSeconds(4.0f);
         bombsDropped--;
+    }
+
+    IEnumerator performFreeze()
+    {
+        // freeze for 1.5 seconds
+        frozen = true;
+        yield return new WaitForSeconds(1.5f);
+        frozen = false;
     }
 
 }
