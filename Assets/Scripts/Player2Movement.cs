@@ -77,7 +77,7 @@ public class Player2Movement : MonoBehaviour
                 Bomb newBomb = Instantiate(bomb, new Vector2(Mathf.RoundToInt(rb.position.x),
                                                 Mathf.RoundToInt(rb.position.y)), transform.rotation);
                 ++bombsDropped;
-                StartCoroutine(newBomb.GetComponent<Bomb>().Explode());
+                StartCoroutine(newBomb.GetComponent<Bomb>().Explode(bombRange));
                 StartCoroutine(delayBombs());
                 placeBomb = false;
             }
@@ -128,8 +128,18 @@ public class Player2Movement : MonoBehaviour
         {
             // temporarily freeze the other player
             enemyPlayer = GameObject.FindGameObjectWithTag("Player");
-            enemySprite = enemyPlayer.GetComponent<PlayerMovement>();
-            enemySprite.shouldFreeze = true;
+
+            if (enemyPlayer != null)
+            {
+                enemySprite = enemyPlayer.GetComponent<PlayerMovement>();
+                enemySprite.shouldFreeze = true;
+            }
+
+            Destroy(collision.gameObject);
+        }
+        else if (collision.gameObject.tag == "IncreaseRange")
+        {
+            bombRange++;
             Destroy(collision.gameObject);
         }
 

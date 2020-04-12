@@ -17,24 +17,39 @@ public class Bomb : MonoBehaviour {
         gameObject.AddComponent<BoxCollider2D>();
     }
 
-    public IEnumerator Explode()
+    public IEnumerator Explode(int bombRange)
     {
         yield return new WaitForSeconds(4.0f);
-        GameObject bombExplosion = Instantiate(explosion, new Vector2(Mathf.RoundToInt(this.transform.position.x),
-                                                Mathf.RoundToInt(this.transform.position.y)), transform.rotation);
-        GameObject rightExplosion = Instantiate(explosion, new Vector2(Mathf.RoundToInt(this.transform.position.x + 1),
-                                                Mathf.RoundToInt(this.transform.position.y)), transform.rotation);
-        GameObject leftExplosion = Instantiate(explosion, new Vector2(Mathf.RoundToInt(this.transform.position.x - 1),
-                                        Mathf.RoundToInt(this.transform.position.y)), transform.rotation);
-        GameObject topExplosion = Instantiate(explosion, new Vector2(Mathf.RoundToInt(this.transform.position.x),
-                                        Mathf.RoundToInt(this.transform.position.y + 1)), transform.rotation);
-        GameObject bottomExplosion = Instantiate(explosion, new Vector2(Mathf.RoundToInt(this.transform.position.x),
-                                        Mathf.RoundToInt(this.transform.position.y - 1)), transform.rotation);
-        Destroy(bombExplosion, 0.2f);
-        Destroy(rightExplosion, 0.2f);
-        Destroy(leftExplosion, 0.2f);
-        Destroy(topExplosion, 0.2f);
-        Destroy(bottomExplosion, 0.2f);
+
+        GameObject[] bombExplosion = new GameObject[bombRange];
+        GameObject[] rightExplosion = new GameObject[bombRange];
+        GameObject[] leftExplosion = new GameObject[bombRange];
+        GameObject[] topExplosion = new GameObject[bombRange];
+        GameObject[] bottomExplosion = new GameObject[bombRange];
+
+        for (int i = 0; i < bombRange; i++)
+        {
+            bombExplosion[i] = Instantiate(explosion, new Vector2(Mathf.RoundToInt(this.transform.position.x),
+                                                    Mathf.RoundToInt(this.transform.position.y)), transform.rotation);
+            rightExplosion[i] = Instantiate(explosion, new Vector2(Mathf.RoundToInt(this.transform.position.x + (i + 1)),
+                                                    Mathf.RoundToInt(this.transform.position.y)), transform.rotation);
+            leftExplosion[i] = Instantiate(explosion, new Vector2(Mathf.RoundToInt(this.transform.position.x - (i + 1)),
+                                            Mathf.RoundToInt(this.transform.position.y)), transform.rotation);
+            topExplosion[i] = Instantiate(explosion, new Vector2(Mathf.RoundToInt(this.transform.position.x),
+                                            Mathf.RoundToInt(this.transform.position.y + (i + 1))), transform.rotation);
+            bottomExplosion[i] = Instantiate(explosion, new Vector2(Mathf.RoundToInt(this.transform.position.x),
+                                            Mathf.RoundToInt(this.transform.position.y - (i + 1))), transform.rotation);
+        }
+
+        for (int i = 0; i < bombRange; i++)
+        {
+            Destroy(bombExplosion[i], 0.2f);
+            Destroy(rightExplosion[i], 0.2f);
+            Destroy(leftExplosion[i], 0.2f);
+            Destroy(topExplosion[i], 0.2f);
+            Destroy(bottomExplosion[i], 0.2f);
+        }
+
         Destroy(this.gameObject, 0.2f);
     }
     // Update is called once per frame
