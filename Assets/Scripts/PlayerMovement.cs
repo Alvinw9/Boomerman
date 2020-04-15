@@ -19,7 +19,7 @@ public class PlayerMovement : MonoBehaviour
     private bool bombPenetrate = false;
     private bool canWalkThroughWalls = false;
     private bool canMoveBombs = false;
-    private bool hasShield = false;
+    public bool hasShield = false;
     private bool canCreateWall = false;
     private bool stunned = false;
     public bool shouldFreeze = false;
@@ -137,6 +137,11 @@ public class PlayerMovement : MonoBehaviour
         else if (collision.gameObject.tag == "IncreaseRange")
         {
             bombRange++;
+            Destroy(collision.gameObject);
+        }
+        else if (collision.gameObject.tag == "Shield")
+        {
+            hasShield = true;
             Destroy(collision.gameObject);
         }
 

@@ -15,6 +15,9 @@ TagManager:
   - BombSpawn
   - Player2
   - Freeze
+  - IncreaseRange
+  - Shield
+  - explosionContainer
   layers:
   - Default
   - TransparentFX
