@@ -19,13 +19,14 @@ public class Bomb : MonoBehaviour {
 
     public IEnumerator Explode(int bombRange)
     {
-        yield return new WaitForSeconds(4.0f);
+        yield return new WaitForSeconds(3.0f);
 
         GameObject[] bombExplosion = new GameObject[bombRange];
         GameObject[] rightExplosion = new GameObject[bombRange];
         GameObject[] leftExplosion = new GameObject[bombRange];
         GameObject[] topExplosion = new GameObject[bombRange];
         GameObject[] bottomExplosion = new GameObject[bombRange];
+
 
         for (int i = 0; i < bombRange; i++)
         {
@@ -43,11 +44,13 @@ public class Bomb : MonoBehaviour {
 
         for (int i = 0; i < bombRange; i++)
         {
+            
             Destroy(bombExplosion[i], 0.2f);
             Destroy(rightExplosion[i], 0.2f);
             Destroy(leftExplosion[i], 0.2f);
             Destroy(topExplosion[i], 0.2f);
             Destroy(bottomExplosion[i], 0.2f);
+            
         }
 
         Destroy(this.gameObject, 0.2f);
