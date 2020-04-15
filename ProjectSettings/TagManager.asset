@@ -18,6 +18,7 @@ TagManager:
   - IncreaseRange
   - Shield
   - explosionContainer
+  - ExplosionSpeed
   layers:
   - Default
   - TransparentFX
