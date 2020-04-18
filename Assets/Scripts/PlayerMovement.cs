@@ -78,7 +78,7 @@ public class PlayerMovement : MonoBehaviour
                 Bomb newBomb = Instantiate(bomb, new Vector2(Mathf.RoundToInt(rb.position.x),
                                                 Mathf.RoundToInt(rb.position.y)), transform.rotation);
                 ++bombsDropped;
-                StartCoroutine(newBomb.GetComponent<Bomb>().Explode(bombRange));
+                StartCoroutine(newBomb.GetComponent<Bomb>().Explode(bombRange,explosionDelay));
                 StartCoroutine(delayBombs());
                 placeBomb = false;
             }
@@ -144,7 +144,11 @@ public class PlayerMovement : MonoBehaviour
             hasShield = true;
             Destroy(collision.gameObject);
         }
-
+        else if (collision.gameObject.tag == "ExplosionSpeed")
+        {
+            explosionDelay--;
+            Destroy(collision.gameObject);
+        }
     }
 
     IEnumerator performSelfStun()

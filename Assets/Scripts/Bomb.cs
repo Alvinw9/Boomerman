@@ -17,9 +17,9 @@ public class Bomb : MonoBehaviour {
         gameObject.AddComponent<BoxCollider2D>();
     }
 
-    public IEnumerator Explode(int bombRange)
+    public IEnumerator Explode(int bombRange, int explosionDelay)
     {
-        yield return new WaitForSeconds(3.0f);
+        yield return new WaitForSeconds(explosionDelay);
 
         GameObject[] bombExplosion = new GameObject[bombRange];
         GameObject[] rightExplosion = new GameObject[bombRange];
