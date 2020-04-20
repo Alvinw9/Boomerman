@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class explosionScript : MonoBehaviour
 {
+
+    public GameObject newPlayer1;
+    public GameObject newPlayer2;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,30 +24,49 @@ public class explosionScript : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            GameObject player = GameObject.Find("Player");
-            PlayerMovement playerScript = player.GetComponent<PlayerMovement>();
-            if (playerScript.hasShield)
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            PlayerMovement playerScript;
+
+            if (player != null)
             {
-                StartCoroutine(toggleShield(player));
-            }
-            else
-            {
-                Destroy(collision.gameObject);
+
+                playerScript = player.GetComponent<PlayerMovement>();
+
+                if (playerScript.hasShield)
+                {
+                    StartCoroutine(toggleShield(player));
+                }
+                else
+                {
+                    Destroy(collision.gameObject);
+                    GameObject player1 = new GameObject();
+                    player1 = Instantiate(newPlayer1, new Vector2(0, 9), transform.rotation);
+                }
             }
         }
         
         else if (collision.gameObject.tag == "Player2")
         {
-            GameObject player2 = GameObject.Find("Player2");
-            Player2Movement player2Script = player2.GetComponent<Player2Movement>();
-            if (player2Script.hasShield)
+            GameObject player2 = GameObject.FindGameObjectWithTag("Player2");
+            Player2Movement player2Script;
+
+            if (player2 != null)
             {
-                StartCoroutine(toggleShield(player2));
+
+                player2Script = player2.GetComponent<Player2Movement>();
+
+                if (player2Script.hasShield)
+                {
+                    StartCoroutine(toggleShield(player2));
+                }
+                else
+                {
+                    Destroy(collision.gameObject);
+                    GameObject playerNew2 = new GameObject();
+                    playerNew2 = Instantiate(newPlayer2, new Vector2(0, 9), transform.rotation);
+                }
             }
-            else
-            {
-                Destroy(collision.gameObject);
-            }
+
         }
         
         else if ( collision.gameObject.tag == "Wall")
@@ -67,4 +90,5 @@ public class explosionScript : MonoBehaviour
             playerScript.hasShield = false;
         }
     }
+
 }

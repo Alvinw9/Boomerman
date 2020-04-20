@@ -9,7 +9,7 @@ public class Player2Movement : MonoBehaviour
     public Rigidbody2D rb;
     Vector2 movement;
 
-    public static int bombsDropped = 0; // number of bombs that exist on the map
+    public int bombsDropped = 0; // number of bombs that exist on the map
     private int numBombs = 1; // limit to number of bombs player can create at a time
     private int bombRange = 1;
     private int explosionDelay = 3;

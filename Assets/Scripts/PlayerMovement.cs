@@ -11,7 +11,7 @@ public class PlayerMovement : MonoBehaviour
     int horizontal;
     int vertical;
 
-    public static int bombsDropped = 0; // number of bombs that exist on the map
+    public int bombsDropped = 0; // number of bombs that exist on the map
     private int numBombs = 1; // limit to number of bombs player can create at a time
     private int bombRange = 1;
     private int explosionDelay = 3;
@@ -50,6 +50,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (!stunned && !frozen)
         {
+
             // "Enter" key to place bomb
             if (Input.GetKeyUp(KeyCode.Return) && (bombsDropped < numBombs))
             {

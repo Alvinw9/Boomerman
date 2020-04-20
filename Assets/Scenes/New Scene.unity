@@ -343,12 +343,12 @@ PrefabInstance:
     - target: {fileID: 8488804988400267993, guid: d2addd45e5615084c8738ffebabc16ec,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.7
+      value: 0.07
       objectReference: {fileID: 0}
     - target: {fileID: 8488804988400267993, guid: d2addd45e5615084c8738ffebabc16ec,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 8.91
+      value: 9.54
       objectReference: {fileID: 0}
     - target: {fileID: 8488804988400267993, guid: d2addd45e5615084c8738ffebabc16ec,
         type: 3}
@@ -642,6 +642,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9dd7acc429ea0844890a5c880a1d938c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  newPlayer1: {fileID: 0}
+  newPlayer2: {fileID: 0}
 --- !u!212 &1845774566
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -760,7 +762,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 10
+  orthographic size: 100
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
