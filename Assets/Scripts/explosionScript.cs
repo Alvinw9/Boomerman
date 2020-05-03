@@ -1,12 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class explosionScript : MonoBehaviour
 {
-
-    public GameObject newPlayer1;
-    public GameObject newPlayer2;
 
     // Start is called before the first frame update
     void Start()
@@ -39,8 +37,6 @@ public class explosionScript : MonoBehaviour
                 else
                 {
                     Destroy(collision.gameObject);
-                    GameObject player1 = new GameObject();
-                    player1 = Instantiate(newPlayer1, new Vector2(0, 9), transform.rotation);
                 }
             }
         }
@@ -62,8 +58,6 @@ public class explosionScript : MonoBehaviour
                 else
                 {
                     Destroy(collision.gameObject);
-                    GameObject playerNew2 = new GameObject();
-                    playerNew2 = Instantiate(newPlayer2, new Vector2(0, 9), transform.rotation);
                 }
             }
 
